@@ -1,0 +1,58 @@
+/*! lesstest */
+//*!で圧縮の際もコメントを残せる
+// 変数 = 定数　演算も可能
+
+@color : red;
+@h1size : 10px;
+@h2size : @h1size / 2;
+
+// 文字列代入も可能w
+// 展開する場合は、@{url}とする
+@url : "http://google.com";
+
+// 色の演算
+@color1 : #ff5500;
+@color2 : @color1 +  #222222;
+
+// mixin
+// 下の.myBourderを他のスタイルにそのまま使用できる。.myBourder;で追加OK
+// (@name)で引数を取ることもできる 引数を更に演算とかも可能
+// 初期値(@name:2px)
+.myBourder(@pxs:2px){
+	border-top: @pxs solid red;
+	border-bottom: @pxs * 2 solid red;
+}
+
+h1{
+	font-size:@h1size;
+	color: @color1;
+	.myBourder;
+}
+
+h2{
+	font-size:@h2size;
+	color: @color2;
+	.myBourder(10px);
+}
+
+// 変数のスコープ
+// ブロック単位？
+@colorred: red;
+
+// 子要素を入れ子に書ける
+// 入れ子のなかで&をつけてクラス名を書く
+#header {
+	font-size:16px;
+
+	.logo {
+		font-weight:bold;
+		&:hover {font-weight:normal;}
+	}
+
+	.menu {
+		@colorred: #00f;
+		border : 1px solid @colorred;
+	}
+
+}
+
